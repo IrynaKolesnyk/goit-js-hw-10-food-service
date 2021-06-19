@@ -11,6 +11,10 @@ const Theme = {
 const refs = {
     menuContainer: document.querySelector('.js-menu'),
     switchInput: document.querySelector('#theme-switch-toggle'),
+    containerThemeSwitch: document.querySelector('.theme-switch'),
+
+    iconMoon: document.querySelector('.js-moon'),
+    iconSun: document.querySelector('.js-sun'),
     // btnAddToBasket: document.querySelector('menu .card__button')
 };
 
@@ -25,13 +29,37 @@ function createMenuCardsMarkup(menu) {
 
 // смена темы сайта
 refs.switchInput.addEventListener('change', onSwitchChange);
+populateTheme();
 
 function onSwitchChange(event) {
-    console.log("onSwitchChange", onSwitchChange)
 
-    if (event) {
-        document.body.classList.toggle(Theme.DARK);
+    const darkThemeChange = document.body.classList.toggle(Theme.DARK);
+    localStorage.setItem('dark', darkThemeChange);
+};
+
+function populateTheme() {
+    const getKeyLocalStorage = localStorage.getItem('dark');
+    const stringD = JSON.parse(getKeyLocalStorage);
+
+    if (stringD) {
+        refs.switchInput.checked = true;
+        document.body.classList.add(Theme.DARK);
     }
-    console.log("event", event);
+};
 
+// смена темы при нажатии на солнце или луну (работает, но есть проблемы с <use>)
+refs.iconMoon.addEventListener('click', onClickThemeSwitch);
+refs.iconSun.addEventListener('click', onClickThemeSwitch);
+
+function onClickThemeSwitch(event) {
+
+    if (event.target === refs.iconMoon) {
+        document.body.classList.add(Theme.DARK);
+        refs.switchInput.checked = true;
+        localStorage.setItem('dark', true);
+    } else if (event.target === refs.iconSun) {
+        document.body.classList.remove(Theme.DARK);
+        refs.switchInput.checked = false;
+        localStorage.setItem('dark', false);
+    }
 };
