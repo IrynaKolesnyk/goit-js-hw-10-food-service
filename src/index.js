@@ -10,10 +10,9 @@ const Theme = {
 
 const refs = {
     menuContainer: document.querySelector('.js-menu'),
+    switchInput: document.querySelector('#theme-switch-toggle'),
     // btnAddToBasket: document.querySelector('menu .card__button')
 };
-
-
 
 // создание разметки меню
 const cardsMenu = createMenuCardsMarkup(menu);
@@ -25,3 +24,14 @@ function createMenuCardsMarkup(menu) {
 };
 
 // смена темы сайта
+refs.switchInput.addEventListener('change', onSwitchChange);
+
+function onSwitchChange(event) {
+    console.log("onSwitchChange", onSwitchChange)
+
+    if (event) {
+        document.body.classList.toggle(Theme.DARK);
+    }
+    console.log("event", event);
+
+};
