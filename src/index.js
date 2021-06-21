@@ -47,10 +47,30 @@ function populateTheme() {
     }
 };
 
+// Вариант Юрия
+// function populateTheme() {
+//     const getKeyLocalStorage = localStorage.getItem('dark');
+//     const stringD = Boolean(getKeyLocalStorage);
+//     if (stringD) document.body.classList.add(Theme.DARK);
+//     refs.switchInput.checked = stringD;
+// }
+
 // смена темы при нажатии на солнце или луну (работает, но есть проблемы с <use>)
 refs.iconMoon.addEventListener('click', onClickThemeSwitch);
 refs.iconSun.addEventListener('click', onClickThemeSwitch);
 
+// function onClickThemeSwitch(event) {
+//     const checked = !event.target.checked;
+//     if (checked) {
+//         document.body.classList.add(Theme.DARK);
+//     } else {
+//         document.body.classList.remove(Theme.DARK);
+//     }
+//     refs.switchInput.checked = checked;
+//     localStorage.setItem('dark', checked);
+// }
+
+// мой вариант
 function onClickThemeSwitch(event) {
 
     if (event.target === refs.iconMoon) {
